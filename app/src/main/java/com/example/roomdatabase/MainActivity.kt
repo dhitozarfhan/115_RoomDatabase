@@ -11,28 +11,26 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.roomdatabase.repositori.ContainerDataApp
 import com.example.roomdatabase.ui.theme.RoomDatabaseTheme
+import com.example.roomdatabase.view.uicontroller.SiswaApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            RoomDatabaseTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ContainerDataApp(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            RoomDatabaseTheme {  }
+            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                SiswaApp(
+                    modifier = Modifier.padding(innerPadding)
+                )
             }
         }
     }
 }
 
 @Composable
-fun ContainerDataApp(name: String, modifier: Modifier = Modifier) {
+fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
         modifier = modifier
@@ -43,6 +41,6 @@ fun ContainerDataApp(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     RoomDatabaseTheme {
-        ContainerDataApp("Android")
+        Greeting("Android")
     }
 }
