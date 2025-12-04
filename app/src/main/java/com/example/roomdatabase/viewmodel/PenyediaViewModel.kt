@@ -1,30 +1,34 @@
-package com.example.RoomDatabase.viewmodel.provider
+package com.example.roomdatabase.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.RoomDatabase.viewmodel.EntryViewModel
 import com.example.roomdatabase.repositori.AplikasiSiswa
+import com.example.roomdatabase.repositori.RepositoriSiswa
+import com.example.roomdatabase.viewmodel.EntryViewModel
 import com.example.roomdatabase.viewmodel.HomeViewModel
 
-
 object PenyediaViewModel {
-    val Factory = viewModelFactory {
+
+    val Factory = viewModelFactory{
         initializer {
             HomeViewModel(aplikasiSiswa().containerApp.repositoriSiswa)
         }
+
         initializer {
             EntryViewModel(aplikasiSiswa().containerApp.repositoriSiswa)
+        }
+
+        initializer {
+            DetailViewModel(savedStateHandle = this.createSavedStateHandle(),
+                repositoriSiswa = aplikasiSiswa().containerApp.repositoriSiswa)
+
         }
     }
 }
 
-/**
- * Fungsi ekstensi query untuk objek [Application] dan mengembalikan sebuah
- * instance dari
- * [AplikasiSiswa].
- */
 fun CreationExtras.aplikasiSiswa(): AplikasiSiswa =
-    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as AplikasiSiswa)
+    (this[ViewModelProvider.AndroidViewModelFactory
+        .APPLICATION_KEY] as AplikasiSiswa)
